@@ -7,6 +7,10 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name="all_post",query = "SELECT p FROM Post p")
+})
+
 @Entity
 @Getter
 @Setter

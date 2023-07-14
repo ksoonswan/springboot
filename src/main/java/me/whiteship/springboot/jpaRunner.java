@@ -1,6 +1,9 @@
 package me.whiteship.springboot;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.springframework.boot.ApplicationArguments;
@@ -18,9 +21,14 @@ public class jpaRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+//        entityManager.createNamedQuery("all_post",Post.class);
 
-        TypedQuery query = entityManager.createQuery("SELECT p FROM Post AS p", Post.class);
-        List<Post> posts = query.getResultList();
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Post> query = builder.createQuery(Post.class);
+        Root<Post> root = query.from(Post.class);
+        query.select(root);
+
+        List<Post> posts = entityManager.createQuery(query).getResultList();
         posts.forEach(System.out::println);
 
     }
