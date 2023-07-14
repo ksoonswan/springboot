@@ -6,6 +6,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -16,14 +17,12 @@ import java.util.List;
 @Transactional
 public class jpaRunner implements ApplicationRunner {
 
-    @PersistenceContext
-    EntityManager entityManager;
+    @Autowired
+    Swan swan;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        List<Post> posts = entityManager.createNativeQuery("SELECT * FROM Post", Post.class).getResultList();
-        posts.forEach(System.out::println);
-
-
+        System.out.println("=======================");
+        System.out.println(swan.getName());
     }
 }
