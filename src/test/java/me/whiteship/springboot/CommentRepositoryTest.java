@@ -1,5 +1,6 @@
 package me.whiteship.springboot;
 
+import org.checkerframework.checker.units.qual.C;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class CommentRepositoryTest {
 
     @Test
     public void crud(){
+        Comment comment = new Comment();
+        comment.setComment("spring data jpa");
+        commentRepository.save(comment);
 
+        List<Comment> comments =  commentRepository.findByCommentContains("spring");
+        assertThat(comments.size()).isEqualTo(1);
     }
 }

@@ -9,11 +9,6 @@ import java.util.List;
 
 public interface CommentRepository extends MyRepository<Comment, Long>{
 
-    List<Comment> findByCommentContains(String comment);
-
-    List<Comment> findFirst10ByComment(String comment);
-
-    Page<Comment> findByLikeCountGreaterThanAndPost(int likeCount, Post post, Pageable pageable);
-
+    List<Comment> findByCommentContains(String keyword);
 
 }
