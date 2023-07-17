@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    username: swan
+    url: jdbc:postgresql://localhost:5432/springdata
+    password: pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org:
+      postgresql: debug
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace
+        orm :
+          jdbc :
+            bind: trace
