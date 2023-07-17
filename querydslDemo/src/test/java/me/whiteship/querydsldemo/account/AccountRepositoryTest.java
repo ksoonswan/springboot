@@ -1,14 +1,14 @@
 package me.whiteship.querydsldemo.account;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.querydsl.core.types.Predicate;
-import org.checkerframework.checker.units.qual.A;
+import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -19,8 +19,13 @@ public class AccountRepositoryTest {
 
     @Test
     public void crud(){
-        Account account = new Account();
-        Predicate predicate = account.fir
+        QAccount account = QAccount.account;
+        Predicate predicate = account
+                .firstName.containsIgnoreCase("swan")
+                .and(QAccount.account.lastName.startsWith("kim"));
+
+        Optional<Account> one = accountRepository.findOne(predicate);
+        assertThat(one).isEmpty();
     }
 
 }

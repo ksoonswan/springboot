@@ -41,7 +41,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-ㄴ
+
         <!-- Querydsl 관련 의존성 -->
         <dependency>
             <groupId>com.querydsl</groupId>
