@@ -16,6 +16,7 @@
         </configuration>
         <groupId>org.springframework.boot</groupId>
       </plugin>
+
     </plugins>
   </build>
   <dependencies>
@@ -30,6 +31,16 @@
     <dependency>
       <artifactId>spring-boot-starter-hateoas</artifactId>
       <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>hibernate-jpamodelgen</artifactId>
+      <groupId>org.hibernate</groupId>
+      <version>6.1.7.Final</version>
+    </dependency>
+    <dependency>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+      <groupId>jakarta.xml.bind</groupId>
+      <version>4.0.0</version>
     </dependency>
 
     <dependency>
