@@ -3,7 +3,6 @@ package me.whiteship.commonweb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import jakarta.persistence.EntityManager;
 import java.util.List;
 import me.whiteship.commonweb.post.Post;
 import me.whiteship.commonweb.post.PostRepository;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +21,7 @@ public class PostControllerTest {
   PostRepository postRepository;
 
   @Autowired
-  private EntityManager entityManager;
+//  private EntityManager entityManager;
 
   @Test
   public void save(){
@@ -45,7 +45,7 @@ public class PostControllerTest {
   public void findByTitle(){
     savePost();
 
-    List<Post> all = postRepository.findByTitle("swanJpa");
+    List<Post> all = postRepository.findByTitle("swanJpa", Sort.by("title"));
     assertThat(all.size()).isEqualTo(1);
   }
 
