@@ -13,21 +13,26 @@ public class CommentRepositoryTest {
   @Autowired
   CommentRepository commentRepository;
 
-  private Comment createComment(){
-    Comment comment = new Comment();
-    comment.setComment("comment1");
-    return commentRepository.save(comment);
-  }
+  @Autowired
+  PostRepository postRepository;
 
   @Test
-  public void getComment(){
-    createComment();
+  public void getComment() {
+    Post post = new Post();
+    post.setTitle("jps");
+    Post savedPost = postRepository.save(post);
 
-    commentRepository.getCommentById(1L);
+    Comment comment = new Comment();
+    comment.setPost(savedPost);
+    comment.setUp(10);
+    comment.setDown(1);
+    comment.setComment("코멘트적어!");
+    commentRepository.save(comment);
 
-    System.out.println("======================");
-
-    commentRepository.findById(1L);
+    commentRepository.findByPost_Id(savedPost.getId(), CommentOnly.class).forEach(c -> {
+      System.out.println("=================");
+      System.out.println(c.getComment());
+    });
 
   }
 

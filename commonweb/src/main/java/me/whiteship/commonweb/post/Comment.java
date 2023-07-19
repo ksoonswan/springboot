@@ -17,4 +17,10 @@ public class Comment {
 
   @ManyToOne()
   private Post post;
+
+  private int up;
+
+  private int down;
+
+  private boolean best;
 }
