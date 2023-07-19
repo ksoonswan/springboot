@@ -1,16 +1,25 @@
 package me.whiteship.commonweb.post;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import java.util.Date;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Data
+@EntityListeners(AuditingEntityListener.class)
 public class Comment {
 
-  @Id @GeneratedValue
+  @Id
+  @GeneratedValue
   private Long id;
 
   private String comment;
@@ -23,4 +32,18 @@ public class Comment {
   private int down;
 
   private boolean best;
+
+  @CreatedDate
+  private Date createdAt;
+
+  @CreatedBy
+  @ManyToOne
+  private Account createdBy;
+
+  @LastModifiedDate
+  private Date updatedAt;
+
+  @LastModifiedBy
+  @ManyToOne
+  private Account updatedBy;
 }
