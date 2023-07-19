@@ -1,9 +1,14 @@
 package me.whiteship.commonweb.post;
 
+import static me.whiteship.commonweb.post.CommentSpecs.isBest;
+import static me.whiteship.commonweb.post.CommentSpecs.isGood;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -33,7 +38,18 @@ public class CommentRepositoryTest {
       System.out.println("=================");
       System.out.println(c.getComment());
     });
+  }
 
+
+  @Test
+  public void specs() {
+    Comment comment = new Comment();
+    comment.setUp(10);
+    comment.setDown(1);
+    comment.setComment("코멘트적어!");
+    commentRepository.save(comment);
+    Page<Comment> page = commentRepository.findAll(isBest().and(isGood()),
+        PageRequest.of(0, 10));
   }
 
 }
