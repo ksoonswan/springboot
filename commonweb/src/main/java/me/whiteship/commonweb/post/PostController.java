@@ -17,17 +17,17 @@ public class PostController {
   PostRepository posts;
 
   @GetMapping("/posts/{id}")
-  public String getPost(@PathVariable("id") Post post){
+  public String getPost(@PathVariable("id") Post post) {
     return post.getTitle();
   }
 
   @GetMapping("/posts")
-  public Page<Post> getPosts(Pageable pageable){
+  public Page<Post> getPosts(Pageable pageable) {
     return posts.findAll(pageable);
   }
 
   @GetMapping("/posts2")
-  public PagedModel<EntityModel<Post>> getPosts2(Pageable pageable, PagedResourcesAssembler<Post> assembler){
+  public PagedModel<EntityModel<Post>> getPosts2(Pageable pageable, PagedResourcesAssembler<Post> assembler) {
     return assembler.toModel(posts.findAll(pageable));
   }
 
