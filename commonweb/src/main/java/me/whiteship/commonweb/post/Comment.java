@@ -5,6 +5,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import java.util.Date;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
@@ -46,4 +47,11 @@ public class Comment {
   @LastModifiedBy
   @ManyToOne
   private Account updatedBy;
+
+  @PrePersist
+  public void prePersist() {
+    System.out.println("Pre Persist is called");
+    this.createdAt = new Date();
+//    this.createdBy = "Swan";
+  }
 }
