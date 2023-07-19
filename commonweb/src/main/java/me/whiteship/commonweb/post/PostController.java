@@ -1,4 +1,4 @@
-package me.whiteship.commonweb;
+package me.whiteship.commonweb.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
